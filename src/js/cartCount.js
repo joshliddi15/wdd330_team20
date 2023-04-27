@@ -1,21 +1,12 @@
-import { setLocalStorage } from './utils.mjs';
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 const cartCount = document.querySelector('.cart-count');
 
-export function updateCartCount(status) {
-  let itemCount = getLocalStorage('itemCount');
-  if (!itemCount) {
-    itemCount = 0;
+export function updateCartCount() {
+  let cart = getLocalStorage('so-cart');
+  if (!cart) {
+    cart = [];
+    setLocalStorage('so-cart', cart);
   }
-  if (status == 'add'){
-   itemCount++
-  }
-  else if(status == 'subtract'){
-   itemCount--
-  }
-  cartCount.textContent = itemCount;
-  setLocalStorage('itemCount', itemCount);
+  cartCount.textContent = cart.length;
 }
-
-
