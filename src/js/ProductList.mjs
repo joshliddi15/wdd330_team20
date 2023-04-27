@@ -17,6 +17,7 @@ export default class ProductListing {
     this.dataSource = dataSource;
     this.listElement = listElement;
   }
+
   async init() {
     const fullList = await this.dataSource.getData();
     const idArr = ['880RR', '344YJ', '985PR', '985RF'];
