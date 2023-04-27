@@ -2,12 +2,13 @@ function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error("Bad Response");
+    throw new Error('Bad Response');
   }
 }
 
 export default class ProductData {
   constructor(category) {
+    // tents backapacks sleepingbags
     this.category = category;
     this.path = `../json/${this.category}.json`;
   }
