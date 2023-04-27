@@ -101,6 +101,7 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
+  
 }
 
 .cart svg {
@@ -109,8 +110,22 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-
+/*-- julia added this */
+/* cart-counter */
+.cart-count{
+  position: absolute;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: .25em;
+  border-radius: 50%;
+  font-size: .7em;
+  top: 0;
+  left: 4px;
+  
+}
 /* End cart icon styles */
+
+
 
 .mission {
   padding: 0 0.5em;
