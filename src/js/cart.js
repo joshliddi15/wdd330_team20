@@ -2,7 +2,7 @@ import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
-  if (cartItems.length > 0) {
+  if (cartItems) {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector('.cart-product-list').innerHTML = htmlItems.join('');
     renderTotal(cartItems);
