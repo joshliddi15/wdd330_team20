@@ -7,7 +7,6 @@ function renderCartContents() {
     document.querySelector('.cart-product-list').innerHTML = htmlItems.join('');
     renderTotal(cartItems);
   }
-
 }
 
 function cartItemTemplate(item) {
@@ -33,7 +32,7 @@ renderCartContents();
 
 function calculateTotal(items) {
   let total = 0;
-  items.forEach((item) => (total += (item.FinalPrice * item.Quantity)));
+  items.forEach((item) => (total += item.FinalPrice * item.Quantity));
   return total;
 }
 
