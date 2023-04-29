@@ -35,3 +35,10 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   }
   parentElement.insertAdjacentHTML(position, html.join(""));
 }
+
+export function countCartContents() {
+  const items = getLocalStorage('so-cart');
+  let qty = 0
+  items.forEach((item) => (qty += item.Quantity));
+  document.querySelector('.cart-count').innerHTML = qty;
+}
