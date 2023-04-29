@@ -8,6 +8,7 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData();
+    // list = list.filter(filterResults);
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
@@ -25,3 +26,10 @@ function productCardTemplate(product) {
   <p class="product-card__price">$${product.FinalPrice}</p></a>
 </li>`;
 }
+
+// function filterResults(item) {
+//   const filterCriteria = ["880RR", "985RF", "985PR", "344YJ"];
+//   let Id = toString(item.Id);
+//   console.log(filterCriteria.find(Id));
+//   return !(filterCriteria.find(item.Id)) === undefined;
+// }

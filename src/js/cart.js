@@ -2,9 +2,12 @@ import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.cart-product-list').innerHTML = htmlItems.join('');
-  renderTotal(cartItems);
+  if (cartItems.length > 0) {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector('.cart-product-list').innerHTML = htmlItems.join('');
+    renderTotal(cartItems);
+  }
+
 }
 
 function cartItemTemplate(item) {
@@ -30,13 +33,11 @@ renderCartContents();
 
 function calculateTotal(items) {
   let total = 0;
-  items.forEach((item) => (total += item.FinalPrice));
+  items.forEach((item) => (total += (item.FinalPrice * item.Quantity)));
   return total;
 }
 
 function renderTotal(cartItems) {
-  console.log("counting items in cart");
-  console.log(Object.keys(cartItems).length);
   if (cartItems.length) {
     const total = calculateTotal(cartItems);
     document.querySelector('.cart-total').innerHTML = total;
