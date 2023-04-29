@@ -3,7 +3,7 @@ import { getLocalStorage } from './utils.mjs';
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  document.querySelector('.cart-product-list').innerHTML = htmlItems.join('');
   renderTotal(cartItems);
 }
 
@@ -19,7 +19,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">qty: ${item.Quantity}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -35,6 +35,8 @@ function calculateTotal(items) {
 }
 
 function renderTotal(cartItems) {
+  console.log("counting items in cart");
+  console.log(Object.keys(cartItems).length);
   if (cartItems.length) {
     const total = calculateTotal(cartItems);
     document.querySelector('.cart-total').innerHTML = total;
