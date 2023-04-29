@@ -1,6 +1,5 @@
 import { getLocalStorage } from './utils.mjs';
 import { setLocalStorage } from './utils.mjs';
-import { getParams } from './utils.mjs';
 
 export default class ProductDetails {
         constructor(productId, dataSource) {
@@ -23,44 +22,47 @@ export default class ProductDetails {
         //First get what is already in localStorage and assign it to a variable (if there is anything, it will come back as an array):
         let cart = getLocalStorage('so-cart');
         //if there was no "cart" already, like you didn't have anything yet, then create an empty array:
-        if (!cart) {
-            cart = [];
-        }
+        if (!cart) {cart = [];}
         let cartQty = 0;
-        if (cart.contains(this.product)) {
-            cartQty = 
+        let cartIndex = (cart.findIndex(({ Id }) => Id === this.productId));
+        if (cartIndex > -1) {
+            cartQty = cart[cartIndex].Quantity;
+            cart[cartIndex].Quantity = cartQty + 1;
         }
-        const qty = {'Quantity': cartQty}
-        this.product.assign(this.product,{Quantity: })
+        else{
+            let item = this.product;
+            item.Quantity = 1;
+            cart.push(item);
+        }
+        
         //now we push the product that the user clicked on with "addtoCart" button to the end of the array
-        (cart.push(this.product));
-        setLocalStorage('itemCount', cart.length);
-        //and then setLocalStorage with the new contents of the cart:
+        
         setLocalStorage('so-cart', cart);
     }
     
-        renderProductDetails(selector) {
-            const element = document.querySelector(selector);
-            element.insertAdjacentHTML(
-            "afterBegin",
-            productDetailsTemplate(this.product)
-            );
-        }}
+    renderProductDetails(selector) {
+        const element = document.querySelector(selector);
+        element.insertAdjacentHTML(
+        "afterBegin",
+        productDetailsTemplate(this.product)
+        );
+    }}
 
-        function productDetailsTemplate(product) {
-            return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
-              <h2 class="divider">${product.NameWithoutBrand}</h2>
-              <img
-                class="divider"
-                src="${product.Image}"
-                alt="${product.NameWithoutBrand}"
-              />
-              <p class="product-card__price">$${product.FinalPrice}</p>
-              <p class="product__color">${product.Colors[0].ColorName}</p>
-              <p class="product__description">
-              ${product.DescriptionHtmlSimple}
-              </p>
-              <div class="product-detail__add">
-                <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
-              </div></section>`;
-          }
+    function productDetailsTemplate(product) {
+        return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img
+        class="divider"
+        src="${product.Image}"
+        alt="${product.NameWithoutBrand}"
+        />
+        <p class="product-card__price">$${product.FinalPrice}</p>
+        <p class="product__color">${product.Colors[0].ColorName}</p>
+        <p class="product__description">
+        ${product.DescriptionHtmlSimple}
+        </p>
+        <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+        </div></section>`;
+        }
+        
