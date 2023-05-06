@@ -1,8 +1,8 @@
 import ProductData from './ProductData.mjs';
 import ProductListing from './ProductList.mjs';
-import { countCartContents } from './utils.mjs';
+import { countCartContents, loadHeaderFooter } from './utils.mjs';
 
-
+loadHeaderFooter();
 
 const dataSource = new ProductData('tents');
 let element = document.querySelector('.product-list');
@@ -12,4 +12,3 @@ if (element === undefined) {
 const listing = new ProductListing('Tents', dataSource, element);
 
 listing.init();
-countCartContents();
