@@ -1,4 +1,7 @@
-import { getLocalStorage, countCartContents } from './utils.mjs';
+import { getLocalStorage, loadHeaderFooter, countCartContents } from './utils.mjs';
+debugger;
+loadHeaderFooter();
+renderCartContents();
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
@@ -29,8 +32,6 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-renderCartContents();
-
 function calculateTotal(items) {
   let total = 0;
   items.forEach((item) => (total += item.FinalPrice * item.Quantity));
@@ -52,3 +53,4 @@ function renderTotal(cartItems) {
     }
   }
 }
+
